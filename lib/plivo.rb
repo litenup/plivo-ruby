@@ -644,6 +644,20 @@ module Plivo
         end
     end
 
+    class Say < Element
+        @nestables = []
+        @valid_attributes = ['voice', 'language', 'loop']
+
+        def initialize(body, attributes={})
+            if not body
+                raise PlivoError, 'No text set for Say'
+            else
+                body = HTMLEntities.new(:html4).encode(body, :decimal)
+            end
+            super(body, attributes)
+        end
+    end
+
 
     class Play < Element
         @nestables = []
